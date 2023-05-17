@@ -1,23 +1,29 @@
 ﻿@model List<Pizza>
-<h1>Le nostre pizze</h1>
-<table class="table table-borderless mt-4">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Prezzo</th>
-            <th scope="col">Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(Pizza pizza in Model)
-        {
+<div class="container">
+    <p class="upper-headers text-center mt-3">Pizze</p>
+    <table class="table table-borderless mt-2">
+        <thead>
             <tr>
-                <th scope="row">@pizza.Id</th>
-                <td class="upper-headers">@pizza.Name</td>
-                <td>@pizza.Price</td>
-                <td></td>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Prezzo</th>
+                <th scope="col">Azioni</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach(Pizza pizza in Model)
+            {
+                <tr>
+                    <th scope="row">@pizza.Id</th>
+                    <td class="upper-headers">@pizza.Name</td>
+                    <td>@pizza.Price.ToString("0.00")</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="@Url.Action("Details", "Menù", new { id = pizza.Id })">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
