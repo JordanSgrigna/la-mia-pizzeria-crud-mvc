@@ -43,13 +43,6 @@ body {
     animation: rotation 10s infinite linear;
 }
 
-.multiline-paragrah {
-    width: 50px;
-    height: 130px;
-    resize: none;
-}
-
-
 
 @keyframes rotation {
     from{
