@@ -1,5 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<Pizza>
+<h1>Le nostre pizze</h1>
+<table class="table table-borderless mt-4">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Prezzo</th>
+            <th scope="col">Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Pizza pizza in Model)
+        {
+            <tr>
+                <th scope="row">@pizza.Id</th>
+                <td class="upper-headers">@pizza.Name</td>
+                <td>@pizza.Price</td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+</table>

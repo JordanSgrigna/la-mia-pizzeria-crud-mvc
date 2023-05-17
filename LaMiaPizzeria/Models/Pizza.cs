@@ -14,6 +14,9 @@ namespace LaMiaPizzeria.Models
         [Column(TypeName = "text")]
         public string Description { get; set; }
 
+        [Column(TypeName = "decimal(5,2)")]
+        public float Price { get; set; }
+
         [MaxLength(500)]
         public string ImageUrl { get; set; }
 
