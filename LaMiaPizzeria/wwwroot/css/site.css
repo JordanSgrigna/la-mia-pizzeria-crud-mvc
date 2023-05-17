@@ -1,0 +1,55 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.navbar_shop_name{
+    line-height: 60;
+    vertical-align: middle;
+}
+
+.thin-heading {
+    font-weight: 300;
+    font-size: 40px;
+}
+
+.upper-headers {
+    font-family: "Oswald", sans-serif !important;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.site-font {
+    font-family: "Oswald", sans-serif !important;
+    color: #000;
+}
+
+.navbar_logo_rotation{
+    height: 60px;
+    animation: rotation 10s infinite linear;
+}
+
+
+
+@keyframes rotation{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(359deg);
+    }
+}
