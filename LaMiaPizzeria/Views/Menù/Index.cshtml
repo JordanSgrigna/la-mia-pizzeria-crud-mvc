@@ -1,6 +1,9 @@
 ﻿@model List<Pizza>
 <div class="container">
-    <p class="upper-headers text-center mt-3">Pizze</p>
+    <div style="line-height: 1">
+        <h4 class="upper-headers text-center d-inline">Pizze</h4>
+        <a class="btn btn-dark btn-sm rounded-0 pb-0" href="@Url.Action("AggiungiPizza", "Menù")" role="button">Add</a>
+    </div>
     <table class="table table-borderless mt-2">
         <thead>
             <tr>
@@ -13,7 +16,7 @@
         <tbody>
             @foreach(Pizza pizza in Model)
             {
-                <tr>
+                <tr class="border-bottom border-black">
                     <th scope="row" class="site-font">@pizza.Id</th>
                     <td class="upper-headers">@pizza.Name</td>
                     <td class="site-font">@pizza.Price.ToString("0.00")</td>

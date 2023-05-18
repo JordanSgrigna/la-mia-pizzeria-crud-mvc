@@ -1,27 +1,35 @@
-﻿<div class="container mt-5 w-75">
-    <div class="row">
-        <div class="col-12 d-flex flex-row justify-content-between">
-            <h5 class="upper-headers">aggiungi una pizza</h5>
-            <a class="btn btn-dark rounded-0 btn-sm" href="#" role="button">Salva</a>
+﻿@model Pizza
+
+<div class="container mt-5 w-75">
+    <form asp-controller="Menù" asp-action="AggiungiPizza" method="post">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h5 class="upper-headers">aggiungi una pizza</h5>
+                <button type="submit" class="btn btn-dark rounded-0">Salva</button>
+            </div>
         </div>
-    </div>
-    <form>
+    
+        @Html.AntiForgeryToken()
         <div class="row">
             <div class="col-lg-6 col-sm-12 mb-3">
-                <label class="form-label site-font">Nome</label>
-                <input type="text" class="form-control border border-secondary rounded-0" id="exampleInputEmail1">
+                <label asp-for="Name" class="form-label site-font">Nome</label>
+                <input asp-for="Name" type="text" class="form-control border border-secondary rounded-0" required>
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="col-lg-6 col-sm-12 mb-3">
-                <label class="form-label site-font">Prezzo</label>
-                <input type="text" class="form-control border border-secondary rounded-0" id="exampleInputEmail1">
+                <label asp-for="Price" class="form-label site-font">Prezzo</label>
+                <input asp-for="Price" type="text" class="form-control border border-secondary rounded-0">
+                <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="col-12 mb-3">
-                <label class="form-label site-font">URL Immagine</label>
-                <input type="text" class="form-control border border-secondary rounded-0" id="exampleInputPassword1">
+                <label asp-for="ImageUrl" class="form-label site-font">URL Immagine</label>
+                <input asp-for="ImageUrl" type="text" class="form-control border border-secondary rounded-0" required>
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="col-12 mb-3">
-                <label class="form-label site-font">Descrizione</label>
-                <textarea type="text" row="20" class="form-control border border-secondary rounded-0"></textarea>
+                <label asp-for="Description" class="form-label site-font">Descrizione</label>
+                <textarea asp-for="Description" type="text" row="20" class="form-control border border-secondary rounded-0"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
         </div>
     </form>

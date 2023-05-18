@@ -35,5 +35,10 @@ namespace LaMiaPizzeria.Models
             Description = description;
             ImageUrl = imageUrl;
         }
+
+        public Pizza()
+        {
+
+        }
     }
 }

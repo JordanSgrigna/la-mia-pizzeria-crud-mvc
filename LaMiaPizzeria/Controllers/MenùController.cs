@@ -43,6 +43,7 @@ namespace LaMiaPizzeria.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AggiungiPizza(Pizza newPizza)
         {
             if (!ModelState.IsValid)
