@@ -7,6 +7,7 @@ namespace LaMiaPizzeria.Controllers
 {
     public class MenùController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             using(PizzaShopContext db = new PizzaShopContext())
@@ -17,6 +18,7 @@ namespace LaMiaPizzeria.Controllers
             
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             using (PizzaShopContext db = new PizzaShopContext())
@@ -32,6 +34,12 @@ namespace LaMiaPizzeria.Controllers
                     return NotFound($"La pizza con id {id} non è stato trovato");
                 }
             }
+        }
+
+        [HttpGet]
+        public IActionResult AggiungiPizza()
+        {
+            return View();
         }
     }
 
