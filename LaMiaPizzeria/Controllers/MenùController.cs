@@ -41,6 +41,25 @@ namespace LaMiaPizzeria.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult AggiungiPizza(Pizza newPizza)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newPizza);
+            }
+            else
+            {
+                using (PizzaShopContext db = new PizzaShopContext())
+                {
+                    db.Pizza.Add(newPizza);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+        }
     }
 
 }
