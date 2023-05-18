@@ -1,6 +1,19 @@
-﻿namespace LaMiaPizzeria.Models.CustomValidation
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace LaMiaPizzeria.Models.CustomValidation
 {
-    public class PizzaPriceValidation
+    public class PriceValidation : ValidationAttribute
     {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            float fieldValue = (float)value;
+
+            if (fieldValue < 0 )
+            {
+                return new ValidationResult("Il campo prezzo deve avere un prezzo maggiore di 0");
+            }
+
+            return ValidationResult.Success;
+        }
     }
 }
