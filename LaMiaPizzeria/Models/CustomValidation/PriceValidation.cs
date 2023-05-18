@@ -8,7 +8,7 @@ namespace LaMiaPizzeria.Models.CustomValidation
         {
             float fieldValue = (float)value;
 
-            if (fieldValue < 0 )
+            if (fieldValue == null || fieldValue < 0 )
             {
                 return new ValidationResult("Il campo prezzo deve avere un prezzo maggiore di 0");
             }
