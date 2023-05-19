@@ -8,7 +8,7 @@ namespace LaMiaPizzeria.Models.CustomValidation
         {
             string fieldInput = (string)value;
 
-            if (fieldInput == null ||  fieldInput.Split(" ").Length < 5)
+            if (fieldInput == null || fieldInput.Split(" ").Length < 5)
             {
                 return new ValidationResult("La descrizione deve contenere almeno 5 parole");
             }

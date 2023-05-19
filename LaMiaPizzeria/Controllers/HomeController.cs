@@ -1,4 +1,5 @@
-﻿using LaMiaPizzeria.Models;
+﻿using LaMiaPizzeria.Database;
+using LaMiaPizzeria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -24,12 +25,44 @@ namespace LaMiaPizzeria.Controllers
 			return View();
 		}
 
+		[HttpGet]
 		public IActionResult ContactUs()
 		{
 			return View("ContactUs");
 		}
+	
+		[HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UserMessages(UserMessages userMessages)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(userMessages);
+            }
+            else
+            {
+                using (PizzaShopContext db = new PizzaShopContext())
+                {
+                    db.UserMessages.Add(userMessages);
+                    db.SaveChanges();
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+                    return RedirectToAction("ContactUs");
+                }
+            }
+        }
+
+		[HttpGet]
+		public IActionResult UserMessages()
+		{
+			using(PizzaShopContext db = new PizzaShopContext())
+			{
+				List<UserMessages> usersMessages = db.UserMessages.ToList();
+				return View(usersMessages);
+			}
+		}
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

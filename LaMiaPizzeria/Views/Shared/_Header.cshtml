@@ -1,28 +1,35 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-expand-md border-bottom border-dark">
     <div class="container-fluid">
-        <div class="d-flex align-items-center">
-            <a class="nav-link active" href="@Url.Action("Index", "Home")">
-                <p class="navbar-brand mb-1 fs-large d-inline upper-headers">La mia Pizzeria</p>
-            </a>
+        <div class="row">
+            <div class="col d-flex align-items-center">
+                <a class="nav-link active" href="@Url.Action("Index", "Home")">
+                    <p class="navbar-brand mb-1 fs-large d-inline upper-headers">La mia Pizzeria</p>
+                </a>
+            </div>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex align-items-center justify-content-end" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link site-font" href="@Url.Action("Index", "Home")">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link site-font" href="@Url.Action("Index", "Menù")">Menù</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link site-font" href="#">Dove siamo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link site-font" href="@Url.Action("ContactUs", "Home")">Contattaci</a>
-                </li>
-            </ul>
+        <div class="col d-flex justify-content-end">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse align-items-center" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link site-font" href="@Url.Action("Index", "Home")">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link site-font" href="@Url.Action("Index", "Menù")">Menù</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link site-font" href="#">Dove siamo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link site-font" href="@Url.Action("ContactUs", "Home")">Contattaci</a>
+                    </li>
+                    <li class="nav-item me-auto">
+                        <a class="nav-link site-font" href="@Url.Action("UserMessages", "Home")">Messaggi</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>

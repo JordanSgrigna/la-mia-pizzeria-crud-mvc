@@ -6,6 +6,7 @@ namespace LaMiaPizzeria.Database
     public class PizzaShopContext : DbContext
     {
         public DbSet<Pizza> Pizza { get; set; }
+        public DbSet<UserMessages> UserMessages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
