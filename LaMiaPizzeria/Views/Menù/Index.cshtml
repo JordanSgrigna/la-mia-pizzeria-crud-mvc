@@ -1,12 +1,14 @@
 ﻿@model List<Pizza>
 
 <div class="container">
-    <div style="line-height: 1">
-        <h4 class="upper-headers text-center d-inline">Pizze</h4>
-        <a class="btn btn-dark btn-sm rounded-0 pb-0" href="@Url.Action("AggiungiPizza", "Menù")" role="button">Add</a>
+    <div class="row pt-3">
+        <div class="col d-flex border-bottom border-black">
+            <h4 class="upper-headers">Pizze</h4>
+            <a class="btn btn-sm btn-dark rounded-0 ms-auto" style="max-height:30px;" href="@Url.Action("AggiungiPizza", "Menù")" role="button">Add</a>
+        </div>
     </div>
-    <table class="table table-borderless mt-2">
-        <thead>
+    <table class="table table-borderless mt-2">    
+        <thead class="bg-dark bg-opacity-10 upper-headers">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>

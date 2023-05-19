@@ -61,6 +61,26 @@ namespace LaMiaPizzeria.Controllers
 			}
 		}
 
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult DeleteMessage(int id)
+		{
+			using (PizzaShopContext db = new PizzaShopContext())
+			{
+				UserMessages? userMessageToDelete = db.UserMessages.Where(m => m.Id == id).FirstOrDefault();
+				if(userMessageToDelete != null)
+				{
+					db.Remove(userMessageToDelete);
+					db.SaveChanges();
+					return RedirectToAction("UserMessages");
+				}
+				else
+				{
+					return NotFound("Il messaggio con questo id non esiste");
+				}
+			}
+		}
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
