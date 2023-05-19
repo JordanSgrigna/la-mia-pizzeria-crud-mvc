@@ -36,6 +36,7 @@ namespace LaMiaPizzeria.Controllers
             }
         }
 
+        //CREATE
         [HttpGet]
         public IActionResult AggiungiPizza()
         {
@@ -58,6 +59,75 @@ namespace LaMiaPizzeria.Controllers
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
+                }
+            }
+        }
+
+        //UPDATE
+        [HttpGet]
+        public IActionResult UpdatePizza(int id)
+        {
+            using(PizzaShopContext db = new PizzaShopContext())
+            {
+                Pizza? pizzaToUpdate = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+                if (pizzaToUpdate != null)
+                {
+                    return View(pizzaToUpdate);
+                }
+                else
+                {
+                    return NotFound("La pizza con questo id non esiste");
+                }
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdatePizza(int id, Pizza updatedPizza)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedPizza);
+            }
+                   
+            using (PizzaShopContext db = new PizzaShopContext())
+            {
+                Pizza? pizzaToModify = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+                if(pizzaToModify != null)
+                {
+                    pizzaToModify.Name = updatedPizza.Name;
+                    pizzaToModify.Description = updatedPizza.Description;
+                    pizzaToModify.Price = updatedPizza.Price;
+                    pizzaToModify.ImageUrl = updatedPizza.ImageUrl;
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound("Non esiste la pizza con questo id");
+                }
+            }
+            
+        }
+
+        //DELETE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePizza(int id)
+        {
+            using (PizzaShopContext db = new PizzaShopContext())
+            {
+                Pizza? pizzaToDelete = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+                if(pizzaToDelete != null)
+                {
+                    db.Remove(pizzaToDelete);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound("Non esiste una pizza da eliminare con questo id");
                 }
             }
         }
