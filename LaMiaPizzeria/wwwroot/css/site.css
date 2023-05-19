@@ -50,6 +50,16 @@ html {
     height: 50px;
 }
 
+.shows{
+    height: 800px;
+    overflow-y: auto;
+}
+
+.landing-page-img-wh{
+    max-width: 300px;
+    max-height: 150px;
+}
+
 
 @keyframes rotation {
     from{
