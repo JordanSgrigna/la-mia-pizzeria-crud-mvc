@@ -25,11 +25,15 @@
                     <li class="nav-item">
                         <a class="nav-link site-font" href="@Url.Action("ContactUs", "Home")">Contattaci</a>
                     </li>
-                    <li class="nav-item me-auto">
-                        <a class="nav-link site-font" href="@Url.Action("UserMessages", "UserMessages")">Messaggi</a>
-                    </li>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <li class="nav-item me-auto">
+                            <a class="nav-link site-font" href="@Url.Action("UserMessages", "UserMessages")">Messaggi</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
+        <partial name="_LoginPartial" />
     </div>
 </nav>

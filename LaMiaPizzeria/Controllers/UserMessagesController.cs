@@ -1,5 +1,6 @@
 ﻿using LaMiaPizzeria.Database;
 using LaMiaPizzeria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LaMiaPizzeria.Controllers
@@ -9,6 +10,7 @@ namespace LaMiaPizzeria.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult UserMessages(UserMessages userMessages)
         {
             if (!ModelState.IsValid)
@@ -28,6 +30,7 @@ namespace LaMiaPizzeria.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult UserMessages()
         {
             using (PizzaShopContext db = new PizzaShopContext())
@@ -39,6 +42,7 @@ namespace LaMiaPizzeria.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult DeleteMessage(int id)
         {
             using (PizzaShopContext db = new PizzaShopContext())
