@@ -60,6 +60,11 @@ html {
     max-height: 150px;
 }
 
+card-wh{
+    max-height: 250px;
+    max-width: 200px;
+}
+
 
 @keyframes rotation {
     from{
