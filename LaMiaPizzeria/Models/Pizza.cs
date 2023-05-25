@@ -28,6 +28,9 @@ namespace LaMiaPizzeria.Models
         [StringLength(500, ErrorMessage = "Il campo URL immagine può contenere al massimo 500 caratteri")]
         public string ImageUrl { get; set; }
 
+        public int? CategoryId { get; set; }
+        public PizzaCategory? Category { get; set; }
+
 
         public Pizza(string name, string description, string imageUrl)
         {
