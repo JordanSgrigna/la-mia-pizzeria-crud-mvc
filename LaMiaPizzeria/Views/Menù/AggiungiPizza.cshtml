@@ -1,4 +1,5 @@
-﻿@model Pizza
+﻿@using LaMiaPizzeria.Models.ModelForViews
+@model PizzaListCategory
 
 <div class="container mt-5 w-75">
     <form asp-controller="Menù" asp-action="AggiungiPizza" method="post">
@@ -12,24 +13,34 @@
         @Html.AntiForgeryToken()
         <div class="row">
             <div class="col-lg-6 col-sm-12 mb-3">
-                <label asp-for="Name" class="form-label site-font">Nome</label>
-                <input asp-for="Name" type="text" class="form-control border border-secondary rounded-0" required>
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Pizza.Name" class="form-label site-font">Nome</label>
+                <input asp-for="Pizza.Name" type="text" class="form-control border border-secondary rounded-0 site-font" required>
+                <span asp-validation-for="Pizza.Name" class="text-danger"></span>
             </div>
             <div class="col-lg-6 col-sm-12 mb-3">
-                <label asp-for="Price" class="form-label site-font">Prezzo</label>
-                <input asp-for="Price" type="text" class="form-control border border-secondary rounded-0">
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="Pizza.Price" class="form-label site-font">Prezzo</label>
+                <input asp-for="Pizza.Price" type="text" class="form-control border border-secondary rounded-0 site-font">
+                <span asp-validation-for="Pizza.Price" class="text-danger"></span>
             </div>
             <div class="col-12 mb-3">
-                <label asp-for="ImageUrl" class="form-label site-font">URL Immagine</label>
-                <input asp-for="ImageUrl" type="text" class="form-control border border-secondary rounded-0" required>
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label asp-for="Pizza.ImageUrl" class="form-label site-font">URL Immagine</label>
+                <input asp-for="Pizza.ImageUrl" type="text" class="form-control border border-secondary rounded-0 site-font" required>
+                <span asp-validation-for="Pizza.ImageUrl" class="text-danger"></span>
             </div>
             <div class="col-12 mb-3">
-                <label asp-for="Description" class="form-label site-font">Descrizione</label>
-                <textarea asp-for="Description" type="text" row="20" class="form-control border border-secondary rounded-0"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Pizza.Description" class="form-label site-font">Descrizione</label>
+                <textarea asp-for="Pizza.Description" type="text" row="20" class="form-control border border-secondary rounded-0 site-font"></textarea>
+                <span asp-validation-for="Pizza.Description" class="text-danger"></span>
+            </div>
+            <div>
+                <p class="site-font">Categoria</p>
+                <select asp-for="Pizza.CategoryId" title="PizzaCategory" class="form-select form-select-lg mb-3 site-font border border-secondary rounded-0" aria-label=".form-select-lg example">
+                    <option value=""></option>
+                    @foreach(PizzaCategory category in Model.PizzaCategory ?? new List<PizzaCategory>())
+                    {
+                        <option class="site-font" value="@category.Id" selected = "@(Model.Pizza.CategoryId == category.Id ? "selected" : null)">@category.Type</option>
+                    }
+                </select>
             </div>
         </div>
     </form>
