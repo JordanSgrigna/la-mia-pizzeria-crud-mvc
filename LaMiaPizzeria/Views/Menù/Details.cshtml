@@ -6,14 +6,13 @@
             <h3 class="upper-headers text-center mt-4">Pizza: @Model.Name</h3>
             <img src="@Model.ImageUrl" alt="@Model.Name" class="d-block m-auto border border-black" style="width: 250px" />
             <p class="text-center mt-3 site-font">@Model.Description</p>
-            <p>Categoria:</p>
             @if(Model.Category != null)
             {
-                <p>@Model.Category</p>
+                <p class="text-center site-font">@Model.Category.Type</p>
             }
             else
             {
-                <p>Nessuna categoria associata</p>
+                <p class="text-center site-font">Nessuna categoria associata</p>
             }
         </div>
     </div>

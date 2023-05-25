@@ -3,6 +3,7 @@ using LaMiaPizzeria.Models;
 using LaMiaPizzeria.Models.ModelForViews;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace LaMiaPizzeria.Controllers
@@ -26,7 +27,7 @@ namespace LaMiaPizzeria.Controllers
         {
             using (PizzaShopContext db = new PizzaShopContext())
             {
-                Pizza? pizzaDetails = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
+                Pizza? pizzaDetails = db.Pizza.Where(pizza => pizza.Id == id).Include(pizza => pizza.Category).FirstOrDefault();
 
                 if(pizzaDetails != null)
                 {
@@ -92,7 +93,13 @@ namespace LaMiaPizzeria.Controllers
                 Pizza? pizzaToUpdate = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
                 if (pizzaToUpdate != null)
                 {
-                    return View(pizzaToUpdate);
+                    List<PizzaCategory> pizzaCategories = db.PizzaCategories.ToList();
+
+                    PizzaListCategory modelView = new PizzaListCategory();
+                    modelView.Pizza = pizzaToUpdate;
+                    modelView.PizzaCategory = pizzaCategories;
+
+                    return View(modelView);
                 }
                 else
                 {
@@ -104,11 +111,16 @@ namespace LaMiaPizzeria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult UpdatePizza(int id, Pizza updatedPizza)
+        public IActionResult UpdatePizza(int id, PizzaListCategory data)
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedPizza);
+                using (PizzaShopContext db = new PizzaShopContext())
+                {
+                    List<PizzaCategory> pizzaCategories = new List<PizzaCategory>();
+                    data.PizzaCategory = pizzaCategories;
+                    return View(data);
+                }
             }
                    
             using (PizzaShopContext db = new PizzaShopContext())
@@ -116,10 +128,11 @@ namespace LaMiaPizzeria.Controllers
                 Pizza? pizzaToModify = db.Pizza.Where(pizza => pizza.Id == id).FirstOrDefault();
                 if(pizzaToModify != null)
                 {
-                    pizzaToModify.Name = updatedPizza.Name;
-                    pizzaToModify.Description = updatedPizza.Description;
-                    pizzaToModify.Price = updatedPizza.Price;
-                    pizzaToModify.ImageUrl = updatedPizza.ImageUrl;
+                    pizzaToModify.Name = data.Pizza.Name;
+                    pizzaToModify.Description = data.Pizza.Name;
+                    pizzaToModify.Price = data.Pizza.Price;
+                    pizzaToModify.ImageUrl = data.Pizza.ImageUrl;
+                    pizzaToModify.CategoryId = data.Pizza.CategoryId;
 
                     db.SaveChanges();
                     return RedirectToAction("Index");
