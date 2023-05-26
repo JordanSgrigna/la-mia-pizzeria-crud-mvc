@@ -17,7 +17,7 @@ namespace LaMiaPizzeria.Controllers
 		[HttpGet] // Viene messa di Default
 		public IActionResult Index()
 		{
-			return View();
+			return View("~/Views/Home/Index.cshtml");
 		}
 
 		public IActionResult Privacy()

@@ -2,7 +2,7 @@
 @model PizzaListCategory
 
 <div class="container mt-5 w-75">
-    <form asp-controller="Menù" asp-action="UpdatePizza" asp-route-id ="@Model.Pizza.Id"  method="post">
+    <form asp-controller="Pizza" asp-action="UpdatePizza" asp-route-id ="@Model.Pizza.Id"  method="post">
         <div class="row">
             <div class="col-12">
                 <h5 class="upper-headers">Modifica della pizza</h5>

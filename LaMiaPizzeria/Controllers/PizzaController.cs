@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace LaMiaPizzeria.Controllers
 {
-    public class MenùController : Controller
+    public class PizzaController : Controller
     {
         [HttpGet]
         public IActionResult Index()
@@ -16,14 +16,14 @@ namespace LaMiaPizzeria.Controllers
             using(PizzaShopContext db = new PizzaShopContext())
             {
                 List<Pizza> ourPizzas = db.Pizza.ToList();
-                return View(ourPizzas);
+                return View("~/Views/Menù/Index.cshtml", ourPizzas);
             }
             
         }
 
         [HttpGet]
         [Authorize]
-        public IActionResult Details(int id)
+        public IActionResult PizzaDetails(int id)
         {
             using (PizzaShopContext db = new PizzaShopContext())
             {
@@ -31,7 +31,7 @@ namespace LaMiaPizzeria.Controllers
 
                 if(pizzaDetails != null)
                 {
-                    return View(pizzaDetails);
+                    return View("~/Views/Menù/Details.cshtml", pizzaDetails);
                 }
                 else
                 {
@@ -43,7 +43,7 @@ namespace LaMiaPizzeria.Controllers
         //CREATE
         [HttpGet]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult AggiungiPizza()
+        public IActionResult AddPizza()
         {
             using(PizzaShopContext db = new PizzaShopContext())
             {
@@ -52,7 +52,7 @@ namespace LaMiaPizzeria.Controllers
                 modelForView.Pizza = new Pizza();
                 modelForView.PizzaCategory = pizzaCategories;
 
-                return View(modelForView);
+                return View("~/ Views/Menù/AddPizza.cshtml",modelForView);
             }
 
         }
@@ -60,7 +60,7 @@ namespace LaMiaPizzeria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult AggiungiPizza(PizzaListCategory data)
+        public IActionResult AddPizza(PizzaListCategory data)
         {
             if (!ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace LaMiaPizzeria.Controllers
                 {
                     List<PizzaCategory> pizzaCategory = db.PizzaCategories.ToList();
                     data.PizzaCategory = pizzaCategory;
-                    return View(data);
+                    return View("~/ Views/Menù/AddPizza.cshtml", data);
                 }
             }
             else
@@ -99,7 +99,7 @@ namespace LaMiaPizzeria.Controllers
                     modelView.Pizza = pizzaToUpdate;
                     modelView.PizzaCategory = pizzaCategories;
 
-                    return View(modelView);
+                    return View("~/ Views/Menù/UpdatePizza.cshtml", modelView);
                 }
                 else
                 {
@@ -119,7 +119,7 @@ namespace LaMiaPizzeria.Controllers
                 {
                     List<PizzaCategory> pizzaCategories = new List<PizzaCategory>();
                     data.PizzaCategory = pizzaCategories;
-                    return View(data);
+                    return View("~/ Views/Menù/UpdatePizza.cshtml", data);
                 }
             }
                    
