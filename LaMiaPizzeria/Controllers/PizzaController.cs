@@ -41,7 +41,7 @@ namespace LaMiaPizzeria.Controllers
                 modelForView.Pizza = new Pizza();
                 modelForView.PizzaCategory = pizzaCategories;
 
-                return View(modelForView);
+                return View("AddPizza", modelForView);
             }
 
         }
