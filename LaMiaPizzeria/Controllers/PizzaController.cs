@@ -11,17 +11,6 @@ namespace LaMiaPizzeria.Controllers
     public class PizzaController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
-        {
-            using(PizzaShopContext db = new PizzaShopContext())
-            {
-                List<Pizza> ourPizzas = db.Pizza.ToList();
-                return View("~/Views/Menù/Index.cshtml", ourPizzas);
-            }
-            
-        }
-
-        [HttpGet]
         [Authorize]
         public IActionResult PizzaDetails(int id)
         {
@@ -31,7 +20,7 @@ namespace LaMiaPizzeria.Controllers
 
                 if(pizzaDetails != null)
                 {
-                    return View("~/Views/Menù/Details.cshtml", pizzaDetails);
+                    return View(pizzaDetails);
                 }
                 else
                 {
@@ -52,7 +41,7 @@ namespace LaMiaPizzeria.Controllers
                 modelForView.Pizza = new Pizza();
                 modelForView.PizzaCategory = pizzaCategories;
 
-                return View("~/ Views/Menù/AddPizza.cshtml",modelForView);
+                return View(modelForView);
             }
 
         }
@@ -68,7 +57,7 @@ namespace LaMiaPizzeria.Controllers
                 {
                     List<PizzaCategory> pizzaCategory = db.PizzaCategories.ToList();
                     data.PizzaCategory = pizzaCategory;
-                    return View("~/ Views/Menù/AddPizza.cshtml", data);
+                    return View(data);
                 }
             }
             else
@@ -78,7 +67,7 @@ namespace LaMiaPizzeria.Controllers
                     db.Pizza.Add(data.Pizza);
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Menù");
                 }
             }
         }
@@ -99,7 +88,7 @@ namespace LaMiaPizzeria.Controllers
                     modelView.Pizza = pizzaToUpdate;
                     modelView.PizzaCategory = pizzaCategories;
 
-                    return View("~/ Views/Menù/UpdatePizza.cshtml", modelView);
+                    return View(modelView);
                 }
                 else
                 {
@@ -119,7 +108,7 @@ namespace LaMiaPizzeria.Controllers
                 {
                     List<PizzaCategory> pizzaCategories = new List<PizzaCategory>();
                     data.PizzaCategory = pizzaCategories;
-                    return View("~/ Views/Menù/UpdatePizza.cshtml", data);
+                    return View(data);
                 }
             }
                    
@@ -135,7 +124,7 @@ namespace LaMiaPizzeria.Controllers
                     pizzaToModify.CategoryId = data.Pizza.CategoryId;
 
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Menù");
                 }
                 else
                 {
@@ -158,7 +147,7 @@ namespace LaMiaPizzeria.Controllers
                 {
                     db.Remove(pizzaToDelete);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Menù");
                 }
                 else
                 {
