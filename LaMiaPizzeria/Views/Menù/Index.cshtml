@@ -35,7 +35,7 @@
                         <th scope="row" class="site-font">@pizza.Id</th>
                     }
                     <td class="upper-headers">@pizza.Name</td>
-                    <td><img src = "@pizza.ImageUrl" alt="Foto pizza @pizza.Name" height="50" width="50"/></td>
+                    <td><img src = "@pizza.ImageUrl" alt="Foto pizza @pizza.Name" height="150" width="150"/></td>
                     <td class="site-font">@pizza.Price.ToString("0.00")</td>
                     @if (User.Identity.IsAuthenticated)
                     {
